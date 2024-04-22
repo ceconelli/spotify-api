@@ -10,6 +10,7 @@ import jakarta.inject.Singleton;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.Optional;
 
 @Singleton
@@ -31,5 +32,45 @@ public class UserServiceImpl implements UserService {
     public UserDTO createUser(UserDTO userDTO) {
         UserEntity newUser = userEntityRepository.save(userMapper.fromUserDTOToUserEntity(userDTO));
         return userMapper.fromUserEntityToUserDTO(newUser);
+    }
+
+    @Override
+    @Transactional
+    public List<UserDTO> getAllUsers() {
+        List<UserEntity> allUsers = userEntityRepository.findAll();
+        return userMapper.map(allUsers);
+    }
+
+    @Override
+    @Transactional
+    public Long deleteUser(Long id) {
+        userEntityRepository.deleteById(id);
+        return id;
+    }
+
+    @Override
+    @Transactional
+    public UserDTO updateUser(UserDTO userDTO) {
+        UserEntity userToBeUpdated =  userEntityRepository.findById(userDTO.id()).orElseThrow(
+                () -> new NotFoundException("User not found by id " + userDTO.id())
+        );
+
+        userToBeUpdated.setEmail(userDTO.email());
+        userToBeUpdated.setUsername(userDTO.username());
+        userToBeUpdated.setPassword(userDTO.password());
+        userToBeUpdated.setFirstname(userDTO.firstname());
+        userToBeUpdated.setLastname(userDTO.lastname());
+
+        userEntityRepository.update(userToBeUpdated);
+        return userMapper.fromUserEntityToUserDTO(userToBeUpdated);
+    }
+
+    @Override
+    @Transactional
+    public UserDTO changePassword(Long id, String password) {
+        UserEntity userToBeUpdated =  userEntityRepository.findById(id).orElseThrow();
+        userToBeUpdated.setPassword(password);
+        return userMapper.fromUserEntityToUserDTO(userEntityRepository.update(userToBeUpdated));
+
     }
 }

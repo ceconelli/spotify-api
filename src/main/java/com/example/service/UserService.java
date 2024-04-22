@@ -2,15 +2,19 @@ package com.example.service;
 
 import com.example.dto.UserDTO;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface UserService {
 
     UserDTO createUser(UserDTO useDTO);
 
-//    List<UserDTO> findAll();
-
     UserDTO findById(Long id);
 
-//    void delete(Long id);
+    List<UserDTO> getAllUsers();
+
+    Long deleteUser(Long id);
+
+    UserDTO updateUser(UserDTO useDTO);
+
+    UserDTO changePassword(Long id, String newPassword);
 }

@@ -27,9 +27,10 @@ public class PlaylistEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user ;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+            CascadeType.REFRESH })
     @JoinTable(
-            name = "playlist_song" ,
+            name = "playlist_song",
             joinColumns = {@JoinColumn(name = "playlist_id")} ,
             inverseJoinColumns = {@JoinColumn(name = "song_id")}
     )
