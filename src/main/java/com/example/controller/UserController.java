@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.PlaylistDTO;
 import com.example.dto.UserDTO;
 import com.example.service.UserService;
 import io.micronaut.http.HttpResponse;
@@ -58,6 +59,12 @@ public class UserController {
     @Status(HttpStatus.OK)
     public HttpResponse<UserDTO> changePassword(@PathVariable Long id, @Body String newPassword) {
         return HttpResponse.ok(userService.changePassword(id, newPassword));
+    }
+
+    @Get("/getPlaylistsFromUser/{id}")
+    @Status(HttpStatus.OK)
+    public HttpResponse<List<PlaylistDTO>> getUserPlaylists(@PathVariable Long id) {
+        return HttpResponse.ok(userService.getUserPlaylists(id));
     }
 
 

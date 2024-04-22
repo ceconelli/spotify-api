@@ -14,12 +14,20 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @Controller("/playlists")
 @Validated
 @RequiredArgsConstructor
 public class PlaylistController {
 
     private final PlaylistService playlistService;
+
+    @Get
+    @Status(HttpStatus.OK)
+    public HttpResponse<List<PlaylistDTO>> getAllPlaylists() {
+        return HttpResponse.ok(playlistService.getAllPlaylists());
+    }
 
     @Get("/{id}")
     @Operation(summary = "Get song info", description = "Get song info by id")
@@ -30,9 +38,20 @@ public class PlaylistController {
         return HttpResponse.ok(playlistService.findById(id));
     }
 
-    @Post
+    @Post("/createPlaylist")
     @Status(HttpStatus.CREATED)
     public HttpResponse<PlaylistDTO> createPlaylist(@Body @Valid PlaylistDTO playlistDTO) {
         return HttpResponse.ok(playlistService.createPlaylist(playlistDTO));
+    }
+
+    @Delete("/deletePlaylistById/{id}")
+    public HttpResponse<Long> deletePlaylist(@PathVariable Long id) {
+        playlistService.deletePlaylist(id);
+        return HttpResponse.ok(id);
+    }
+
+    @Put("/editPlaylist")
+    public HttpResponse<PlaylistDTO> editPlaylist(@Body @Valid PlaylistDTO playlistDTO) {
+        return HttpResponse.ok(playlistService.updatePlaylist(playlistDTO));
     }
 }

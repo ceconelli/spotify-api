@@ -10,6 +10,8 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 @Mapper(
         componentModel = MappingConstants.ComponentModel.JSR330,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
@@ -19,10 +21,12 @@ public interface PlaylistMapper {
 
     PlaylistMapper MAPPER = Mappers.getMapper(PlaylistMapper.class) ;
 
-    PlaylistDTO toDTO(PlaylistEntity entity) ;
+    List<PlaylistDTO> toDTOs(List<PlaylistEntity> entities);
+
+    PlaylistDTO toDTO(PlaylistEntity entity);
 
     @Mapping(target = "songs", ignore = true)
     @Mapping(target = "user.id" , source = "userId")
-    PlaylistEntity toEntity(PlaylistDTO dto) ;
+    PlaylistEntity toEntity(PlaylistDTO dto);
 
 }
