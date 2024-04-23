@@ -43,7 +43,7 @@ public class UserController {
         return HttpResponse.ok(userService.createUser(userDTO));
     }
 
-    @Delete("/deleteUserById")
+    @Delete("/deleteUserById/{id}")
     @Status(HttpStatus.OK)
     public HttpResponse<Long> deleteUser(@QueryValue Long id) {
         return HttpResponse.ok(userService.deleteUser(id));

@@ -1,6 +1,7 @@
 package com.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.List;
@@ -14,26 +15,31 @@ public class SongEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @NotNull
+    @Column(name = "title")
     private String title;
 
-    @Column
-    private String artist;
-
-    @Column
+    @NotNull
+    @Column(name = "album")
     private String album;
 
-    @Column
+    @NotNull
+    @Column(name = "year")
     private int year;
 
-    @Column
+    @NotNull
+    @Column(name = "genre")
     private String genre;
 
-    @Column
+    @NotNull
+    @Column(name = "duration_in_seconds")
     private int durationInSeconds;
 
     @ManyToMany(mappedBy = "songs")
     private Set<PlaylistEntity> playlists;
+
+    @ManyToOne
+    private ArtistEntity artist;
 
 
 }

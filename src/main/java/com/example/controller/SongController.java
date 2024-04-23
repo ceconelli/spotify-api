@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.dto.AddSongToPlaylistDTO;
 import com.example.dto.ArtistDTO;
 import com.example.dto.SongDTO;
 import com.example.service.ArtistService;
@@ -14,7 +15,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-@Controller("/song")
+import java.util.List;
+
+@Controller("/songs")
 @Validated
 @RequiredArgsConstructor
 public class SongController {
@@ -30,9 +33,33 @@ public class SongController {
         return HttpResponse.ok(songService.findById(id));
     }
 
-    @Post
+    @Get
+    @Status(HttpStatus.OK)
+    public HttpResponse<List<SongDTO>> findAll() {
+        return HttpResponse.ok(songService.getAllSongs());
+    }
+
+    @Post("/createSong")
     @Status(HttpStatus.CREATED)
     public HttpResponse<SongDTO> createSong(@Body @Valid SongDTO songDTO) {
         return HttpResponse.ok(songService.createSong(songDTO));
+    }
+
+    @Put("/updateSong")
+    @Status(HttpStatus.OK)
+    public HttpResponse<SongDTO> updateSong(@Body @Valid SongDTO songDTO) {
+        return HttpResponse.ok(songService.updateSong(songDTO));
+    }
+
+    @Delete("/deleteSongById")
+    @Status(HttpStatus.OK)
+    public HttpResponse<Long> deleteSong(@QueryValue Long id) {
+        return HttpResponse.ok(songService.deleteSong(id));
+    }
+
+    @Post("/addSongToPlaylist")
+    @Status(HttpStatus.OK)
+    public HttpResponse<Long> addSongToPlaylist(@Body @Valid AddSongToPlaylistDTO songToPlaylistDTO) {
+        return HttpResponse.ok(songService.addSongToPlaylist(songToPlaylistDTO));
     }
 }

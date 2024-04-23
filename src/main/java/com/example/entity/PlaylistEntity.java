@@ -14,18 +14,18 @@ import java.util.Set;
 public class PlaylistEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
 
     @NotNull
-    @Column
-    private String name ;
+    @Column(name = "username")
+    private String name;
 
-    @Column
-    private String description ;
+    @Column(name = "description")
+    private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private UserEntity user ;
+    private UserEntity user;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
             CascadeType.REFRESH })

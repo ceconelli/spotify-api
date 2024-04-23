@@ -1,6 +1,8 @@
 package com.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.List;
@@ -11,22 +13,27 @@ import java.util.List;
 public class UserEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @NotNull
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column
+    @NotNull
+    @Email
+    @Column(name = "email")
     private String email;
 
-    @Column
+    @NotNull
+    @Column(name = "password")
     private String password;
 
-    @Column
+    @NotNull
+    @Column(name = "first_name")
     private String firstname ;
 
-    @Column
+    @Column(name = "last_name")
     private String lastname ;
 
     @OneToMany(
