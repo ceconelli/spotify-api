@@ -9,7 +9,6 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
-import java.util.Optional;
 
 @Mapper(
         componentModel = MappingConstants.ComponentModel.JSR330,
@@ -23,6 +22,7 @@ public interface SongMapper {
 
     SongDTO toDTO(SongEntity songEntity);
 
+    @Mapping(target = "artist.id", source = "artistId")
     SongEntity toEntity(SongDTO songDTO);
 
 }
