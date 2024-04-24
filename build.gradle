@@ -18,36 +18,33 @@ dependencies {
     annotationProcessor("io.micronaut:micronaut-http-validation")
     annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
-
     annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+    annotationProcessor group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.4'
+    annotationProcessor group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
+    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
 
     implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
     implementation("io.micronaut.validation:micronaut-validation")
     implementation("jakarta.validation:jakarta.validation-api")
-
-    implementation("io.swagger.core.v3:swagger-annotations")
-//    compileOnly("io.micronaut.openapi:micronaut-openapi-annotations")
-
-    compileOnly("io.micronaut:micronaut-http-client")
-    compileOnly("org.projectlombok:lombok")
-    runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("org.postgresql:postgresql")
-    testImplementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-http-client")
-
-    annotationProcessor group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.4'
-    annotationProcessor group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
-    annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
     implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
     implementation group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.5.5.Final'
     implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.4'
-
-//    annotationProcessor 'io.reactivex.rxjava3:rxjava:3.0.4'
-//    implementation 'io.reactivex.rxjava3:rxjava:3.0.4'
     implementation("io.micronaut.rxjava3:micronaut-rxjava3")
     implementation("io.micronaut.reactor:micronaut-reactor")
+    implementation("io.micronaut.liquibase:micronaut-liquibase")
+    implementation("io.swagger.core.v3:swagger-annotations")
+
+    compileOnly("io.micronaut:micronaut-http-client")
+    compileOnly("org.projectlombok:lombok")
+
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.postgresql:postgresql")
+
+    testImplementation("io.micronaut:micronaut-http-client")
+
 }
 
 
